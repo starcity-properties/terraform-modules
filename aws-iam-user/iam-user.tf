@@ -9,7 +9,8 @@ resource "aws_iam_user_login_profile" "login_profile" {
   password_reset_required = "${var.aws_password_reset_required}"
 }
 
-resource "aws_iam_user_group_membership" "dev-team" {
+resource "aws_iam_user_group_membership" "team" {
   user = "${aws_iam_user.user.name}"
   groups = ["${var.aws_groups}"]
 }
+s
