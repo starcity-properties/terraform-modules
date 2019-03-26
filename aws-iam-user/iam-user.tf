@@ -13,4 +13,3 @@ resource "aws_iam_user_group_membership" "team" {
   user = "${aws_iam_user.user.name}"
   groups = ["${var.aws_groups}"]
 }
-s
