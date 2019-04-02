@@ -1,6 +1,6 @@
 # Starcity Terraform Modules
 
-This repository houses a collection of reusable Terraform module to create AWS resources
+This repository houses a collection of reusable Terraform modules to create AWS resources
 
 ## aws-iam-user
 
