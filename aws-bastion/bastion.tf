@@ -14,6 +14,7 @@ resource "aws_instance" "bastion" {
 }
 
 resource "aws_security_group" "bastion-sg" {
+  name        = "bastion-sg-${var.environment}"
   vpc_id      = "${var.vpc_id}"
   description = "Allow SSH access to bastion host from specific source IPs"
 
