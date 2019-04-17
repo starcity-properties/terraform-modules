@@ -5,6 +5,7 @@ resource "aws_instance" "bastion" {
   ami             = "${var.ami}"
   instance_type   = "${var.instance_type}"
   subnet_id       = "${var.subnet_id}"
+  key_name        = "${var.key_name}"
   security_groups = ["${aws_security_group.bastion-sg.id}"]
 
   tags {
@@ -33,4 +34,9 @@ resource "aws_security_group" "bastion-sg" {
   tags {
     Name = "bastion-sg-${var.environment}"
   }
+}
+
+resource "aws_eip" "bastion" {
+  vpc      = true
+  instance = "${aws_instance.bastion.id}"
 }
