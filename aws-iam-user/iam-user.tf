@@ -1,6 +1,6 @@
 resource "aws_iam_user" "user" {
-  name                 = "${var.aws_name}"
-  force_destroy        = "${var.aws_force_destroy}"
+  name          = "${var.aws_name}"
+  force_destroy = "${var.aws_force_destroy}"
 }
 
 resource "aws_iam_user_login_profile" "login_profile" {
@@ -10,6 +10,6 @@ resource "aws_iam_user_login_profile" "login_profile" {
 }
 
 resource "aws_iam_user_group_membership" "team" {
-  user = "${aws_iam_user.user.name}"
+  user   = "${aws_iam_user.user.name}"
   groups = ["${var.aws_groups}"]
 }

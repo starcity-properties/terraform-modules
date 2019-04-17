@@ -2,9 +2,9 @@
 # Bastion
 ##########
 resource "aws_instance" "bastion" {
-  ami = "${var.ami}"
-  instance_type = "${var.instance_type}"
-  subnet_id = "${var.subnet_id}"
+  ami             = "${var.ami}"
+  instance_type   = "${var.instance_type}"
+  subnet_id       = "${var.subnet_id}"
   security_groups = ["${aws_security_group.bastion-sg.id}"]
 
   tags {
@@ -13,7 +13,7 @@ resource "aws_instance" "bastion" {
 }
 
 resource "aws_security_group" "bastion-sg" {
-  vpc_id = "${var.vpc_id}"
+  vpc_id      = "${var.vpc_id}"
   description = "Allow SSH access to bastion host from specific source IPs"
 
   ingress {
@@ -24,10 +24,10 @@ resource "aws_security_group" "bastion-sg" {
   }
 
   egress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    cidr_blocks     = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags {
