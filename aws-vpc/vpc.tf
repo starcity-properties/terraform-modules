@@ -13,9 +13,10 @@ resource "aws_vpc" "vpc" {
 # Public Subnets
 #################
 resource "aws_subnet" "public-subnet" {
-  count      = "${length(var.public_subnets)}"
-  vpc_id     = "${aws_vpc.vpc.id}"
-  cidr_block = "${element(concat(var.public_subnets, list("")), count.index)}"
+  count             = "${length(var.public_subnets)}"
+  vpc_id            = "${aws_vpc.vpc.id}"
+  cidr_block        = "${element(concat(var.public_subnets, list("")), count.index)}"
+  availability_zone = "${element(concat(var.availability_zones, list("")), count.index)}"
 
   tags = {
     Name        = "public-subnet-${var.environment}"
@@ -27,9 +28,10 @@ resource "aws_subnet" "public-subnet" {
 # Private Subnets
 ##################
 resource "aws_subnet" "private-subnet" {
-  count      = "${length(var.private_subnets)}"
-  vpc_id     = "${aws_vpc.vpc.id}"
-  cidr_block = "${element(concat(var.private_subnets, list("")), count.index)}"
+  count             = "${length(var.private_subnets)}"
+  vpc_id            = "${aws_vpc.vpc.id}"
+  cidr_block        = "${element(concat(var.private_subnets, list("")), count.index)}"
+  availability_zone = "${element(concat(var.availability_zones, list("")), count.index)}"
 
   tags = {
     Name        = "private-subnet-${var.environment}"

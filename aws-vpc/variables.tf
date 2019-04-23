@@ -10,6 +10,12 @@ variable "private_subnets" {
   default     = []
 }
 
+variable "availability_zones" {
+  type        = "list"
+  description = "A list of availability zones"
+  default     = []
+}
+
 variable "vpc_cidr_block" {
   description = "the cidr block used for the VPC"
   default     = ""
