@@ -10,7 +10,7 @@ variable "key_name" {
   description = "Key pair used for your EC2 instance"
 }
 
-variable "subnet_id" {
+variable "public_subnet_id" {
   description = "The ID of the subnet you want to deploy your EC2 instance"
 }
 
