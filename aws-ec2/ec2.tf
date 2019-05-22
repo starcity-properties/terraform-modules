@@ -9,4 +9,8 @@ resource aws_instance ec2 {
   lifecycle {
     create_before_destroy = true
   }
+
+  tags {
+    Name = "${var.ec2_name}"
+  }
 }

@@ -17,3 +17,19 @@ variable "subnet_id" {
 variable "iam_instance_profile" {
   description = "The IAM Instance Profile to launch the instance with"
 }
+
+variable "ec2_name" {
+  description = "Name tag of your EC2 instance"
+}
+
+variable "sg_name" {
+  description = "Name tag of your SG"
+}
+
+variable "cidrs" {
+  description = "SG cidr blocks"
+}
+
+variable "tcp_ports" {
+  description = "TCP ports for SG"
+}
