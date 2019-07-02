@@ -6,10 +6,6 @@ variable "application" {
   description = "The name of the application"
 }
 
-variable "region" {
-  description = "AWS region"
-}
-
 variable "allocated_storage" {
   description = "Amount of storage space for RDS"
 }
@@ -42,5 +38,18 @@ variable "password" {
   description = "Password for the database"
 }
 
+variable "vpc_id" {
+  description = "ID of the VPC"
+}
 
+variable "private_subnet_id" {
+  description = "ID of the private subnet"
+}
 
+variable "ec2_sg" {
+  description = "ID for the EC2 security group"
+}
+
+variable "db_port" {
+  description = "DB port used for ingress and outgress"
+}

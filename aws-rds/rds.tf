@@ -32,10 +32,10 @@ resource "aws_security_group" "billboard-rds-sg" {
   description = "Security group that allows only Billboard instances to access RDS"
 
   ingress {
-    from_port       = 3306
-    to_port         = 3306
+    from_port       = "${var.db_port}"
+    to_port         = "${var.db_port}"
     protocol        = "TCP"
-    security_groups = ["${var.billboard_sg}"]
+    security_groups = ["${var.ec2_sg}"]
   }
 
   egress {
@@ -46,6 +46,6 @@ resource "aws_security_group" "billboard-rds-sg" {
   }
 
   tags {
-    Name = "billboard-rds-sg-${var.environment}"
+    Name = "${var.application}-rds-sg-${var.environment}"
   }
 }
