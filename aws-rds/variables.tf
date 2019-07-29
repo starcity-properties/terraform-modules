@@ -28,6 +28,7 @@ variable "instance_class" {
 
 variable "name" {
   description = "Name of the database"
+  default     = "postgres"
 }
 
 variable "username" {
@@ -43,7 +44,7 @@ variable "vpc_id" {
 }
 
 variable "private_subnet_id" {
-  type = "list"
+  type        = "list"
   description = "ID of the private subnet"
 }
 
