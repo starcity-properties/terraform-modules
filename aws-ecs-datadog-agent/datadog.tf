@@ -17,7 +17,7 @@ resource "aws_ecs_task_definition" "datadog-task" {
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = 512
-  memory                   = 128
+  memory                   = 1024
 }
 
 # ECS task template
