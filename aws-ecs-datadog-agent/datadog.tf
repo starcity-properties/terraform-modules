@@ -22,7 +22,7 @@ resource "aws_ecs_task_definition" "datadog-task" {
 
 # ECS task template
 data "template_file" "datadog-task-template" {
-  template = "${file("tasks/datadog.json")}"
+  template = "${file("datadog.json")}"
 
   vars {
     dd_api_key = "${var.dd_api_key}"
