@@ -5,9 +5,8 @@ resource "aws_ecs_service" "datadog-service" {
   name                = "datadog-service"
   cluster             = "${var.ecs_cluster_id}"
   task_definition     = "${aws_ecs_task_definition.datadog-task.arn}"
-  scheduling_strategy = "DAEMON"
   launch_type         = "FARGATE"
-  
+
   network_configuration {
     subnets          = ["${var.private_subnet_id}"]
     assign_public_ip = false
