@@ -5,7 +5,7 @@
     "environment": [
       {
         "name": "DD_API_KEY",
-        "value": "${DD_API_KEY}"
+        "value": "${dd_api_key}"
       },
       {
         "name": "ECS_FARGATE",
