@@ -2,10 +2,11 @@
 
 # ECS service
 resource "aws_ecs_service" "datadog-service" {
-  name                = "datadog-service"
-  cluster             = "${var.ecs_cluster_id}"
-  task_definition     = "${aws_ecs_task_definition.datadog-task.arn}"
-  launch_type         = "FARGATE"
+  name            = "datadog-service"
+  cluster         = "${var.ecs_cluster_id}"
+  task_definition = "${aws_ecs_task_definition.datadog-task.arn}"
+  launch_type     = "FARGATE"
+  desired_count   = 1
 
   network_configuration {
     subnets          = ["${var.private_subnet_id}"]
