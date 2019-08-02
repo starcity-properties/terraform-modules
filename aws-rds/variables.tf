@@ -43,7 +43,7 @@ variable "vpc_id" {
 }
 
 variable "private_subnet_id" {
-  type = "list"
+  type        = "list"
   description = "ID of the private subnet"
 }
 

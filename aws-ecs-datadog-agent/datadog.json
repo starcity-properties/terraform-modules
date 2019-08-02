@@ -1,0 +1,16 @@
+[
+  {
+    "name": "datadog-agent",
+    "image": "datadog/agent:latest",
+    "environment": [
+      {
+        "name": "DD_API_KEY",
+        "value": "${DD_API_KEY}"
+      },
+      {
+        "name": "ECS_FARGATE",
+        "value": "true"
+      }
+    ]
+  }
+]
