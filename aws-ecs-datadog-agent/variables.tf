@@ -12,4 +12,5 @@ variable "ecs_cluster_id" {
 
 variable "private_subnet_id" {
   description = "The private subnet ID associated with your ECS cluster"
+  type        = "list"
 }
