@@ -28,6 +28,7 @@ variable "instance_class" {
 
 variable "name" {
   description = "Name of the database"
+  default     = "postgres"
 }
 
 variable "username" {
