@@ -18,6 +18,11 @@ resource "aws_ecs_task_definition" "datadog-task" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = 512
   memory                   = 1024
+
+  network_configuration {
+    subnets          = ["${var.private_subnet_id}"]
+    assign_public_ip = false
+  }
 }
 
 # ECS task template

@@ -9,3 +9,7 @@ variable "ecs_task_role" {
 variable "ecs_cluster_id" {
   description = "The ECS cluster ID"
 }
+
+variable "private_subnet_id" {
+  description = "The private subnet ID associated with your ECS cluster"
+}
