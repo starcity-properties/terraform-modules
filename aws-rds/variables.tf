@@ -44,7 +44,7 @@ variable "vpc_id" {
 }
 
 variable "private_subnet_id" {
-  type        = "list"
+  type        = list(string)
   description = "ID of the private subnet"
 }
 
@@ -55,3 +55,4 @@ variable "ec2_sg" {
 variable "db_port" {
   description = "DB port used for ingress and outgress"
 }
+
