@@ -2,27 +2,27 @@
 # Bastion
 ##########
 resource "aws_instance" "bastion" {
-  ami                    = "${var.ami}"
-  instance_type          = "${var.instance_type}"
-  subnet_id              = "${var.subnet_id}"
-  key_name               = "${var.key_name}"
-  vpc_security_group_ids = ["${aws_security_group.bastion-sg.id}"]
+  ami                    = var.ami
+  instance_type          = var.instance_type
+  subnet_id              = var.subnet_id
+  key_name               = var.key_name
+  vpc_security_group_ids = concat([aws_security_group.bastion-sg.id], var.security_groups)
 
-  tags {
+  tags = {
     Name = "bastion-${var.environment}"
   }
 }
 
 resource "aws_security_group" "bastion-sg" {
   name        = "bastion-sg-${var.environment}"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = var.vpc_id
   description = "Allow SSH access to bastion host from specific source IPs"
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "TCP"
-    cidr_blocks = "${var.bastion_cidr_blocks}"
+    cidr_blocks = var.bastion_cidr_blocks
   }
 
   egress {
@@ -32,12 +32,13 @@ resource "aws_security_group" "bastion-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     Name = "bastion-sg-${var.environment}"
   }
 }
 
 resource "aws_eip" "bastion" {
   vpc      = true
-  instance = "${aws_instance.bastion.id}"
+  instance = aws_instance.bastion.id
 }
+
