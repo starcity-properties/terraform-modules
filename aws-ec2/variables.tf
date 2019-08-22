@@ -19,7 +19,7 @@ variable "key_name" {
 }
 
 variable "public_subnet_id" {
-  type        = "list"
+  type        = list(string)
   description = "The ID of the subnet you want to deploy your EC2 instance"
 }
 
@@ -28,7 +28,7 @@ variable "vpc_id" {
 }
 
 variable "ssh_cidr" {
-  type        = "list"
+  type        = list(string)
   description = "CIDR block for bastion access"
 }
 
@@ -47,3 +47,4 @@ variable "ingress_port" {
 variable "iam_instance_profile" {
   description = "The instance profile used for your EC2 instance"
 }
+

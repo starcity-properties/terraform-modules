@@ -1,8 +1,11 @@
-variable "aws_name" {}
-variable "aws_pgp_key" {}
+variable "aws_name" {
+}
+
+variable "aws_pgp_key" {
+}
 
 variable "aws_groups" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
@@ -21,3 +24,4 @@ variable "aws_user_enabled" {
 variable "aws_login_profile_enabled" {
   default = "true"
 }
+
