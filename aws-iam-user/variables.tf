@@ -1,8 +1,6 @@
-variable "aws_name" {
-}
+variable "aws_name" {}
 
-variable "aws_pgp_key" {
-}
+variable "aws_pgp_key" {}
 
 variable "aws_groups" {
   type    = list(string)

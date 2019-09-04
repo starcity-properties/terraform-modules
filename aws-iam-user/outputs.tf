@@ -8,4 +8,3 @@ output "encrypted_password" {
     0,
   )
 }
-
