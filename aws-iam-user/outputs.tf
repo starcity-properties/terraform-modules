@@ -13,3 +13,8 @@ output "iam_user_name" {
   description = "The name of the IAM user"
   value = aws_iam_user.user.name
 }
+
+output "iam_user_arn" {
+  description = "The ARN of the IAM user"
+  value = aws_iam_user.user.arn
+}
