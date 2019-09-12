@@ -1,0 +1,17 @@
+[
+  {
+    "name": "${name}",
+    "image": "python:latest",
+    "essential": true,
+    "entryPoint": [],
+    "command": ["sh", "-c", "touch ./status && python3 -m http.server ${container_port}"],
+    "cpu": ${cpu},
+    "memory": ${memory},
+    "portMappings": [
+      {
+        "containerPort": ${container_port},
+        "hostPort": ${host_port}
+      }
+    ]
+  }
+]
