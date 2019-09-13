@@ -56,3 +56,12 @@ variable "db_port" {
   description = "DB port used for ingress and outgress"
 }
 
+variable "backup_window" {
+  description = "Backup window for automated backups"
+  default     = "09:46-10:16"
+}
+
+variable "backup_retention_period" {
+  description = "Backup retention period"
+  default     = 30
+}
