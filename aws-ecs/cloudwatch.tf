@@ -1,5 +1,5 @@
 data "template_file" "event_pattern" {
-  template = file("${path.module}/files/deploy-notification.json")
+  template = file("${path.module}/files/deploy-failed-notification.json")
 
   vars = {
     cluster_arn = aws_ecs_cluster.ecs_cluster.id
