@@ -1,9 +1,8 @@
 data "template_file" "event_pattern_stopped" {
-  template = file("${path.module}/files/deploy-notification.json")
+  template = file("${path.module}/files/deploy-failed-notification.json")
 
   vars = {
     cluster_arn = aws_ecs_cluster.ecs_cluster.id
-    last_status = "STOPPED"
   }
 }
 
@@ -14,11 +13,10 @@ resource "aws_cloudwatch_event_rule" "failed-deploy" {
 }
 
 data "template_file" "event_pattern_running" {
-  template = file("${path.module}/files/deploy-notification.json")
+  template = file("${path.module}/files/deploy-running-notification.json")
 
   vars = {
     cluster_arn = aws_ecs_cluster.ecs_cluster.id
-    last_status = "RUNNING"
   }
 }
 

@@ -135,5 +135,8 @@ resource "aws_ecs_service" "ecs_service" {
     container_name   = var.application
     container_port   = var.container_port
   }
+  lifecycle {
+    ignore_changes = ["task_definition"]
+  }
 }
 
