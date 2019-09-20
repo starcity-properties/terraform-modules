@@ -22,7 +22,7 @@ data "template_file" "event_pattern_stopped" {
   }
 }
 
-resource "aws_cloudwatch_event_rule" "failed-deploy" {
+resource "aws_cloudwatch_event_rule" "running-deploy" {
   name          = "running-${var.application}-${var.environment}"
   description   = "Deploy running notification ${var.application}-${var.environment}"
   event_pattern = data.template_file.event_pattern_stopped.rendered
