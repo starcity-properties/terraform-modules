@@ -10,10 +10,7 @@
       "${cluster_arn}"
     ],
     "lastStatus": [
-      "STOPPED"
-    ],
-    "stoppedReason": [
-      "Essential container in task exited"
+      "${last_status}"
     ]
   }
 }
