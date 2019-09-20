@@ -123,11 +123,10 @@ resource "aws_ecs_service" "ecs_service" {
 
   network_configuration {
     subnets         = var.private_subnet_ids
-    security_groups = [
+    security_groups = concat([
       aws_security_group.ecs_tasks.id,
       aws_security_group.ecs_service.id,
-      var.db_access_sg,
-    ]
+    ], var.security_groups)
   }
 
   load_balancer {
