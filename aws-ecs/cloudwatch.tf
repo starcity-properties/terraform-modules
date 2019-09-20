@@ -8,7 +8,7 @@ data "template_file" "event_pattern_stopped" {
 }
 
 resource "aws_cloudwatch_event_rule" "failed-deploy" {
-  name          = "failed-deploy-${var.application}-${var.environment}"
+  name          = "deploy-${var.application}-${var.environment}"
   description   = "Deploy failure notification ${var.application}-${var.environment}"
   event_pattern = data.template_file.event_pattern_stopped.rendered
 }
