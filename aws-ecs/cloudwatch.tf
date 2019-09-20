@@ -13,7 +13,7 @@ resource "aws_cloudwatch_event_rule" "failed-deploy" {
   event_pattern = data.template_file.event_pattern_stopped.rendered
 }
 
-data "template_file" "event_pattern_stopped" {
+data "template_file" "event_pattern_running" {
   template = file("${path.module}/files/deploy-notification.json")
 
   vars = {
