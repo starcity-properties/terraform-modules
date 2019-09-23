@@ -32,8 +32,9 @@ variable "container_port" {
   description = "Port in container"
 }
 
-variable "db_access_sg" {
-  description = "Database access security group"
+variable "security_groups" {
+  description = "Security groups"
+  default     = []
 }
 
 variable "cpu" {
