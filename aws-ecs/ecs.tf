@@ -74,7 +74,7 @@ data "template_file" "task_template" {
 }
 
 resource "aws_ecs_task_definition" "task" {
-  family                   = "${var.application}-task-${var.environment}"
+  family                   = "${var.application}-task"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
 
@@ -86,7 +86,7 @@ resource "aws_ecs_task_definition" "task" {
   task_role_arn      = aws_iam_role.ecs_execution_role.arn
 
   tags = {
-    Name        = "${var.application}-task-${var.environment}"
+    Name        = "${var.application}-task"
     Environment = var.environment
   }
 }
@@ -101,7 +101,7 @@ data "aws_ecs_task_definition" "task" {
 # ##############################################
 
 resource "aws_ecs_cluster" "ecs_cluster" {
-  name = "${var.application}-cluster-${var.environment}"
+  name = "${var.application}-cluster"
 
   tags = {
     Name        = "${var.application}-cluster"
@@ -110,7 +110,7 @@ resource "aws_ecs_cluster" "ecs_cluster" {
 }
 
 resource "aws_ecs_service" "ecs_service" {
-  name       = "${var.application}-service-${var.environment}"
+  name       = "${var.application}-service"
   cluster    = aws_ecs_cluster.ecs_cluster.id
   depends_on = [aws_lb_target_group.lb-target-group]
 
