@@ -1,5 +1,7 @@
 # AWS IAM module
 
+Module for creating [AWS IAM](https://aws.amazon.com/iam/) resources 
+
   * [Users (console login)](#users-console-login)
      * [Arguments](#arguments)
      * [Example User with login](#example-user-with-login)
