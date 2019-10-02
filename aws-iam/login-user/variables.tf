@@ -17,7 +17,7 @@ variable "password_reset_required" {
 }
 
 variable "groups" {
-  description = "(Required) A list of IAM Groups to add the user to."
+  description = "(Optional) A list of IAM Groups to add the user to."
   type        = "list"
   default     = []
 }
