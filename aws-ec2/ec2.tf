@@ -6,6 +6,7 @@ resource "aws_instance" "aws-ec2" {
   subnet_id              = element(var.public_subnet_id, 0)
   key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.aws-sg.id]
+  ebs_optimized          = var.ebs_optimized
 
   root_block_device {
     volume_size = var.volume_size
@@ -14,7 +15,7 @@ resource "aws_instance" "aws-ec2" {
 
   lifecycle {
     create_before_destroy = true
-    ignore_changes = [ "ebs_block_device" ]
+    ignore_changes        = ["ebs_block_device"]
   }
 
   tags = {
@@ -26,7 +27,7 @@ resource "aws_instance" "aws-ec2" {
 resource "aws_security_group" "aws-sg" {
   name        = "${var.application}-sg-${var.environment}"
   vpc_id      = var.vpc_id
-  description = "Security group that allows incoming traffic from Bastion and ALB only"
+  description = "Security group that allows incoming traffic from Bastion and ALB xfonly"
 
   ingress {
     from_port   = 22
