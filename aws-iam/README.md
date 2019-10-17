@@ -20,11 +20,19 @@ Module for creating [AWS IAM](https://aws.amazon.com/iam/) resources
 Users created with a login profile to the AWS console. Useful for humans e.g. developers.
 
 ### Arguments
-- `name`: (Required) The user's name. The name must consist of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-_.. User names are not distinguished by case. For example, you cannot create users named both `"TESTUSER"` and `"testuser"`.
-- `pgp_key`: (Required) Either a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Only applies on resource creation. Drift detection is not possible with this argument.
-- `force_destroy`: (Optional, default true) When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed.
-- `password_reset_required`: (Optional, default true) Whether the user should be forced to reset the generated password on resource creation. Only applies on resource creation. Drift detection is not possible with this argument.
-- `groups`: "(Optional) A list of IAM Groups to add the user to."
+| | |
+| ----------- | ----------- |
+| `name` | (Required) The user's name. The name must consist of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-_.. User names are not distinguished by case. For example, you cannot create users named both `"TESTUSER"` and `"testuser"`.
+| `pgp_key` | (Required) Either a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Only applies on resource creation. Drift detection is not possible with this argument.
+| `force_destroy` | (Optional, default true) When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed.
+| `password_reset_required` | (Optional, default true) Whether the user should be forced to reset the generated password on resource creation. Only applies on resource creation. Drift detection is not possible with this argument.
+| `groups`| (Optional) A list of IAM Groups to add the user to.
+
+### Outputs 
+| | |
+| ----------- | ----------- |
+| `name` | The user's name. 
+| `password` | The encrypted password, base64 encoded. ~> NOTE: The encrypted password may be decrypted using the command line, for example: <code>terraform output encrypted_secret &#124; base64 --decode &#124; keybase pgp decrypt.</code> |
 
 ### Example User with login
 ```hcl-terraform
@@ -41,11 +49,22 @@ Users created with a pair of access keys, but without a login profile to the AWS
 **Note**: The user's name will be created with `-sa` attached at the end.
 
 ### Arguments
-- `name`: (Required) The user's name which will have `"-sa"` added at the end. The name must consist of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-_.. User names are not distinguished by case. For example, you cannot create users named both `"TESTUSER"` and `"testuser"`.
-- `pgp_key`: (Required) Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Only applies on resource creation. Drift detection is not possible with this argument.
-- `force_destroy`: (Optional, default true) When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed.
-- `policies`: (Optional, default []). List of policiy ARNs to attach to the group.
-- `policy_documents`: (Optional, default []). List of policiy documents to attach to the group. Read more about policy documents at [AWS IAM Policy Documents with Terraform](https://www.terraform.io/docs/providers/aws/guides/iam-policy-documents.html).
+| | |
+| ----------- | ----------- |
+| `name` | (Required) The user's name which will have `"-sa"` added at the end. The name must consist of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-_.. User names are not distinguished by case. For example, you cannot create users named both `"TESTUSER"` and `"testuser"`.
+| `pgp_key` | (Required) Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Only applies on resource creation. Drift detection is not possible with this argument.
+| `force_destroy` | (Optional, default true) When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed.
+| `policies` | (Optional, default []). List of policiy ARNs to attach to the group.
+| `policy_documents` | (Optional, default []). List of policiy documents to attach to the group. Read more about policy documents at [AWS IAM Policy Documents with Terraform](https://www.terraform.io/docs/providers/aws/guides/iam-policy-documents.html).
+
+### Outputs
+| | |
+| ----------- | ----------- |
+| `arn` | The ARN for the user.
+| `access_key_id` | The access key ID.
+| `access_secret` | The encrypted secret, base64 encoded. ~> NOTE: The encrypted secret may be decrypted using the command line, for example: <code>terraform output encrypted_secret &#124; base64 --decode &#124; keybase pgp decrypt.</code>
+| `name` | The name for the user.
+ 
 
 ### Example CircleCI service account with S3 access
 
@@ -82,10 +101,17 @@ module "circleci-sa" {
 ## Groups
 
 ### Arguments
-- `name`: (Required) The group's name. The name must consist of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-_.. Group names are not distinguished by case. For example, you cannot create groups named both `"ADMINS"` and `"admins"`.
-- `path`: (Optional, default `"/"`) Path in which to create the group.
-- `policies`: (Optional, default []). List of policiy ARNs to attach to the group.
-- `policy_documents`: (Optional, default []). List of policiy documents to attach to the group. Read more about policy documents at [AWS IAM Policy Documents with Terraform](https://www.terraform.io/docs/providers/aws/guides/iam-policy-documents.html).
+| | |
+| ----------- | ----------- |
+| `name` | (Required) The group's name. The name must consist of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-_.. Group names are not distinguished by case. For example, you cannot create groups named both `"ADMINS"` and `"admins"`.
+| `path` | (Optional, default `"/"`) Path in which to create the group.
+| `policies` | (Optional, default []). List of policiy ARNs to attach to the group.
+| `policy_documents` | (Optional, default []). List of policiy documents to attach to the group. Read more about policy documents at [AWS IAM Policy Documents with Terraform](https://www.terraform.io/docs/providers/aws/guides/iam-policy-documents.html).
+
+### Outputs
+ | | |
+ | ----------- | ----------- |
+ | `iam_group_name` | The group name.
 
 ### Example Admins group with required MFA enabled
 IAM policy to require MFA to be enabled for access: `policies/mfa.json`:
@@ -162,12 +188,19 @@ module "admins-group" {
 ## Roles
 
 ### Arguments
-- `name`: (Required) The name of the role.
-- `environment`: (Required) Environment function is running in e.g. "production" or "staging".
-- `identifiers`: (Required) List of identifiers for principals. When type is `"AWS"`, these are IAM user or role ARNs. When type is `"Service"`, these are AWS Service roles e.g. lambda.amazonaws.com.
-- `policies`: (Optional, default []). List of policiy ARNs to attach to the role.
-- `policy_documents`: (Optional, default []). List of policiy documents to attach to the role. Read more about policy documents at [AWS IAM Policy Documents with Terraform](https://www.terraform.io/docs/providers/aws/guides/iam-policy-documents.html).
+| | |
+| ----------- | ----------- |
+| `name` | (Required) The name of the role.
+| `environment` | (Required) Environment function is running in e.g. "production" or "staging".
+| `identifiers` | (Required) List of identifiers for principals. When type is `"AWS"`, these are IAM user or role ARNs. When type is `"Service"`, these are AWS Service roles e.g. lambda.amazonaws.com.
+| `policies` | (Optional, default []). List of policiy ARNs to attach to the role.
+| `policy_documents` | (Optional, default []). List of policiy documents to attach to the role. Read more about policy documents at [AWS IAM Policy Documents with Terraform](https://www.terraform.io/docs/providers/aws/guides/iam-policy-documents.html).
 
+### Outputs 
+| | |
+| ----------- | ----------- |
+| `iam_role_name` | The IAM role name.
+| `iam_role_arn` | The IAM role ARN.
 
 ### Example Execute Lambda function role 
 ```hcl-terraform
