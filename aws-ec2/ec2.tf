@@ -14,6 +14,7 @@ resource "aws_instance" "aws-ec2" {
 
   lifecycle {
     create_before_destroy = true
+    ignore_changes = [ "ebs_block_device" ]
   }
 
   tags = {
