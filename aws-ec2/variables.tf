@@ -48,7 +48,7 @@ variable "iam_instance_profile" {
   description = "The instance profile used for your EC2 instance"
 }
 
-variable "ebs_optmized" {
+variable "ebs_optimized" {
   description = "If the EC2 instance should be EBS optimized"
   default     = true
 }
