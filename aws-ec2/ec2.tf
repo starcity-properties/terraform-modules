@@ -27,7 +27,7 @@ resource "aws_instance" "aws-ec2" {
 resource "aws_security_group" "aws-sg" {
   name        = "${var.application}-sg-${var.environment}"
   vpc_id      = var.vpc_id
-  description = "Security group that allows incoming traffic from Bastion and ALB xfonly"
+  description = "Security group that allows incoming traffic from Bastion and ALB only"
 
   ingress {
     from_port   = 22
